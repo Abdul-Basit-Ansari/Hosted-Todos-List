@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+<!-- title -->
+{% block title %} Todos List {% endblock title %}
+<!-- username -->
+{% block username %} {{user.first_name|title}} {{user.last_name|title}}{% endblock username %}
+<!-- body -->
+{% block body %}
+
+<!-- <style>
+    .myx {
+        display: flexbox;
+        justify-content: flex-end;
+    }
+</style> -->
+
+{% if user.is_authenticated %} {% load humanize %} {% for todo in todos%}
+
+<div class="container my-5 mx-5">
+    <h1 class="text-muted d-inline">{{todo.title|title}}</h1>
+    <p class="text-muted mx-2 d-inline">{{todo.time|naturaltime}}</p>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-danger d-block mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{todo.sno}}">
+    Delete
+  </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{todo.sno}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-secondary" id="exampleModalLabel">Delete???</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark text-muted">
+                    Do You Want To Delete The Item?
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancle</button>
+                    <a href="/delete/{{todo.sno}}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <a href="/delete" class=" btn btn-outline-danger myx">Delete</a> -->
+
+    <hr class="text-muted">
+    <p class="text-muted">{{todo.desc|title}}</p>
+</div>
+{% endfor %} {% else %}
+<div class="msg text-secondary text-center mt-5">
+
+    <h1>
+
+        DEAR PERSON
+    </h1>
+    <h1>
+
+        WELCOME TO TODOS LIST
+    </h1>
+    <h1>
+        PLEASE LOGIN AND USE FEATCHERS
+    </h1>
+
+</div>
+{% endif %} {% endblock body %}

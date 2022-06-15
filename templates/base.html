@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>
+        {% block title %} {% endblock title %}
+    </title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            background-color: #181818;
+            width: 100vw;
+        }
+        
+        .errorlist {
+            display: none;
+        }
+        
+        .form-control::-webkit-input-placeholder {
+            color: green;
+        }
+        
+        .form-control:-moz-placeholder {
+            color: green;
+        }
+        
+        .file::-webkit-file-upload-button {
+            color: black;
+            background-color: #157347;
+        }
+        
+        .file {
+            color: black;
+            border: .1rem solid black;
+            background-color: #157347;
+        }
+        
+        .btr {
+            margin-left: -65%;
+        }
+        
+        .btl {
+            margin-left: -400%;
+        }
+        
+        .bl {
+            margin-right: -60%;
+        }
+    </style>
+    <div class="navbar navbar-dark border-bottom bordr-secondary bg-dark">
+        <div class="container-fluid">
+            <a class="mx-4 navbar-brand" href="/">{% block username %}{% endblock username %}{% if user.is_authenticated %}'s |{% endif %} Todos List</a> {% if not user.is_authenticated %}
+
+
+            <div class="btr">
+
+                <!-- model -->
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Account</button>
+
+
+                <!-- model -->
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">Login Account</button>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content  p-5 bg-dark text-muted">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="text-center mt-1 mb-3 text-success">SignUp</h1>
+                            <form action="/signup" method="post">
+                                {% csrf_token %}
+                                <div class="input-group mb-3 ">
+                                    <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
+                                    <input type="text" class="form-control bg-dark text-success border-success" name="fname" placeholder="First Name" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 ">
+                                    <span class="input-group-text bg-success text-dark border-dark " id="basic-addon1 ">Enter</span>
+                                    <input type="text" class="form-control bg-dark text-success border-success " name="lname" placeholder="Last Name " aria-label="Username " aria-describedby="basic-addon1 ">
+                                </div>
+
+                                <div class="input-group mb-3 ">
+                                    <input type="email" name="email" class="form-control bg-dark text-success border-success " placeholder="Email Address " aria-label="Email Address " aria-describedby="basic-addon2 ">
+                                    <span class="input-group-text bg-success text-dark border-dark " id="basic-addon2 ">@example.com</span>
+                                </div>
+
+
+
+                                <div class="input-group mb-3 ">
+                                    <input type="password" class="form-control bg-dark text-success border-success" name="pass1" placeholder="Create Password " aria-label="Create Password ">
+                                </div>
+                                <div class="input-group mb-3 ">
+
+                                    <!-- <span class="input-group-text bg-success text-dark border-dark ">&</span> -->
+                                    <input type="password" name="pass2" class="form-control bg-dark text-success border-success " placeholder="Confrim Password" aria-label="Confrim Password ">
+                                </div>
+                                <div class="input-group">
+                                    <!-- <span class="input-group-text bg-success text-dark border-dark " id="basic-addon2 ">Create User Name & Enter Phone Number</span> -->
+                                    <input type="text" name="uname" aria-label="Username" placeholder="Create User Name" class="form-control bg-dark text-success border-success  ">
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="submit" class="btn btn-success border-dark text-dark container my-3 ">Create Account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content p-5 bg-dark text-muted">
+                        <div class="modal-header">
+                            <h5 class="modal-title " id="exampleModalLabel">Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <h1 class="mb-5 text-center">Log In</h1>
+                        <form method="post" action="/login">
+                            {% csrf_token %}
+
+
+                            <div class="input-group mb-3 ">
+                                <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
+                                <input type="text " class="form-control bg-dark text-success border-success " name="uname" placeholder="User Name" aria-label="Username " aria-describedby="basic-addon1 ">
+                            </div>
+                            <div class="input-group mb-3 ">
+                                <span class="input-group-text bg-success text-dark border-dark " id="basic-addon1 ">Enter</span>
+                                <input type="password" class="form-control bg-dark text-success  border-success " name="password" placeholder="Password" aria-label="Password " aria-describedby="basic-addon1 ">
+                            </div>
+                            <button type="submit " class="btn btn-success border-dark text-dark container my-3 ">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
+
+            <!-- model -->
+            <div class="btl">
+                <button type="button" class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#exampleModal2">Add Todo</button>
+                <a href="/logout/" class="btn btn-outline-danger mx-3 ">Logout</a>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content p-5 bg-dark text-muted">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Todo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <h1 class="mb-5 text-center">Add Todo</h1>
+                        <form method="post" action="/addtodo">
+                            {% csrf_token %}
+
+
+                            <div class="input-group mb-3 ">
+                                <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
+                                <input type="text" class="form-control bg-dark text-success border-success " name="title" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1 ">
+                            </div>
+                            <div class="input-group mb-3 ">
+                                <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
+                                <textarea class="form-control bg-dark border-success text-success" placeholder="Enter Descreption" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <button type="submit " class="btn btn-success border-dark text-dark container my-3 ">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+
+              
+            
+        
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+
+    {% for message in messages %}
+
+
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %} {% block body %} {% endblock body %}
+
+
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
