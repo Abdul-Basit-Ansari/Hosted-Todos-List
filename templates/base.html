@@ -56,42 +56,57 @@
         .bl {
             margin-right: -60%;
         }
+        
+        @media screen and (min-width:500px) {
+            .emailchange::after {
+                content: "@example.com";
+            }
+           
+        }
+        
+        @media (max-width:500px) and (min-width:10px) {
+            .emailchange::after {
+                content: "@";
+            }
+           .usernametext{
+            font-size:1rem;
+           }
+        }
     </style>
-    <div class="navbar navbar-dark border-bottom bordr-secondary bg-dark">
+
+
+
+
+
+
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-md navbar-dark border-bottom bordr-secondary bg-dark">
         <div class="container-fluid">
-            <a class="mx-4 navbar-brand" href="/">{% block username %}{% endblock username %}{% if user.is_authenticated %}'s |{% endif %} Todos List</a> {% if not user.is_authenticated %}
-
-
-            <div class="btr">
-
-                <!-- model -->
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModalcreate">Create Account</button>
-
-
-                <!-- model -->
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModallogin">Login Account</button>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Modal -->
+            <a class="navbar-brand usernametext" href="#">  {% block username %}{% endblock username %}{% if user.is_authenticated %}'s |{% endif %} Todos List</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+             {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                         <!-- model -->
+                        <button type="button" class="btn btn-outline-success m-1 " data-bs-toggle="modal" data-bs-target="#exampleModalcreate">Create Account</button>
+                    </li>
+                    <li class="nav-item">
+                        <!-- model -->
+                        <button type="button" class="btn btn-outline-success m-1" data-bs-toggle="modal" data-bs-target="#exampleModallogin">Login Account</button>
+                    </li>
+                    
+                             <!-- Modal -->
             <div class="modal fade " id="exampleModalcreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog ">
-                    <div class="modal-content  p-5 bg-dark text-muted">
+                    <div class="modal-content  p-4 bg-dark text-muted">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -102,31 +117,31 @@
                                 {% csrf_token %}
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
-                                    <input type="text" class="form-control bg-dark text-success border-success" name="fname" placeholder="First Name" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input required type="text" class="form-control bg-dark text-success border-success" name="fname" placeholder="First Name" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text bg-success text-dark border-dark " id="basic-addon1 ">Enter</span>
-                                    <input type="text" class="form-control bg-dark text-success border-success " name="lname" placeholder="Last Name " aria-label="Username " aria-describedby="basic-addon1 ">
+                                    <input required type="text" class="form-control bg-dark text-success border-success " name="lname" placeholder="Last Name " aria-label="Username " aria-describedby="basic-addon1 ">
                                 </div>
 
                                 <div class="input-group mb-3 ">
-                                    <input type="email" name="email" class="form-control bg-dark text-success border-success " placeholder="Email Address " aria-label="Email Address " aria-describedby="basic-addon2 ">
-                                    <span class="input-group-text bg-success text-dark border-dark " id="basic-addon2 ">@example.com</span>
+                                    <input required type="email" name="email" class="form-control bg-dark text-success border-success " placeholder="Email Address " aria-label="Email Address " aria-describedby="basic-addon2 ">
+                                    <span class="input-group-text bg-success text-dark border-dark emailchange" id="basic-addon2 "></span>
                                 </div>
 
 
 
                                 <div class="input-group mb-3 ">
-                                    <input type="password" class="form-control bg-dark text-success border-success" name="pass1" placeholder="Create Password " aria-label="Create Password ">
+                                    <input required type="password" class="form-control bg-dark text-success border-success" name="pass1" placeholder="Create Password " aria-label="Create Password ">
                                 </div>
                                 <div class="input-group mb-3 ">
 
                                     <!-- <span class="input-group-text bg-success text-dark border-dark ">&</span> -->
-                                    <input type="password" name="pass2" class="form-control bg-dark text-success border-success " placeholder="Confrim Password" aria-label="Confrim Password ">
+                                    <input required type="password" name="pass2" class="form-control bg-dark text-success border-success " placeholder="Confrim Password" aria-label="Confrim Password ">
                                 </div>
                                 <div class="input-group">
                                     <!-- <span class="input-group-text bg-success text-dark border-dark " id="basic-addon2 ">Create User Name & Enter Phone Number</span> -->
-                                    <input type="text" name="uname" aria-label="Username" placeholder="Create User Name" class="form-control bg-dark text-success border-success  ">
+                                    <input required type="text" name="uname" aria-label="Username" placeholder="Create User Name" class="form-control bg-dark text-success border-success  ">
                                 </div>
 
                                 <div class="modal-footer">
@@ -147,7 +162,7 @@
             <!-- Modal -->
             <div class="modal fade" id="exampleModallogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog ">
-                    <div class="modal-content p-5 bg-dark text-muted">
+                    <div class="modal-content p-4 bg-dark text-muted">
                         <div class="modal-header">
                             <h5 class="modal-title " id="exampleModalLabel">Login</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -159,11 +174,11 @@
 
                             <div class="input-group mb-3 ">
                                 <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
-                                <input type="text " class="form-control bg-dark text-success border-success " name="uname" placeholder="User Name" aria-label="Username " aria-describedby="basic-addon1 ">
+                                <input required type="text " class="form-control bg-dark text-success border-success " name="uname" placeholder="User Name" aria-label="Username " aria-describedby="basic-addon1 ">
                             </div>
                             <div class="input-group mb-3 ">
                                 <span class="input-group-text bg-success text-dark border-dark " id="basic-addon1 ">Enter</span>
-                                <input type="password" class="form-control bg-dark text-success  border-success " name="password" placeholder="Password" aria-label="Password " aria-describedby="basic-addon1 ">
+                                <input required type="password" class="form-control bg-dark text-success  border-success " name="password" placeholder="Password" aria-label="Password " aria-describedby="basic-addon1 ">
                             </div>
                             <button type="submit " class="btn btn-success border-dark text-dark container my-3 ">Login</button>
                         </form>
@@ -173,12 +188,14 @@
 
             {% else %}
 
+                    <li class="nav-item">
+                         
+                        <button type="button" class="btn btn-outline-success m-1" data-bs-toggle="modal" data-bs-target="#exampleModaladd">Add Todo</button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout/" class="btn btn-outline-danger m-1 ">Logout</a>
 
-            <!-- model -->
-            <div class="btl">
-                <button type="button" class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#exampleModaladd">Add Todo</button>
-                <a href="/logout/" class="btn btn-outline-danger mx-3 ">Logout</a>
-            </div>
+                    </li>
             <!-- Modal -->
             <div class="modal fade" id="exampleModaladd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -194,7 +211,7 @@
 
                             <div class="input-group mb-3 ">
                                 <span class="input-group-text bg-success text-dark border-dark" id="basic-addon1 ">Enter</span>
-                                <input type="text" class="form-control bg-dark text-success border-success " name="title" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1 ">
+                                <input required type="text" class="form-control bg-dark text-success border-success " name="title" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1 ">
                             </div>
                             <div class="input-group mb-3 ">
                                 <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
@@ -207,16 +224,19 @@
             </div>
 
             {% endif %}
-
-
-
-
-
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 
 
-    </div>
+
+
+
+
+
+
+
 
 
 

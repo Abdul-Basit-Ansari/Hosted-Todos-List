@@ -31,7 +31,6 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = ["tasks-list-django.herokuapp.com","localhost","127.0.0.1"]
-# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition

@@ -2,7 +2,7 @@
 <!-- title -->
 {% block title %} Todos List {% endblock title %}
 <!-- username -->
-{% block username %} {{user.first_name|title}} {{user.last_name|title}}{% endblock username %}
+{% block username %} {{user.first_name|title}}{% endblock username %}
 <!-- body -->
 {% block body %}
 
@@ -15,7 +15,7 @@
 
 {% if user.is_authenticated %} {% load humanize %} {% for todo in todos%}
 
-<div class="container my-5 mx-5">
+<div class="container my-5" style="margin-left: 10%; width:90vw">
     <h1 class="text-muted d-inline">{{todo.title|title}}</h1>
     <p class="text-muted mx-2 d-inline">{{todo.time|naturaltime}}</p>
 
@@ -50,15 +50,15 @@
 {% endfor %} {% else %}
 <div class="msg text-secondary text-center mt-5">
 
-    <h1>
+    <h1 class="mymsgs">
 
         DEAR PERSON
     </h1>
-    <h1>
+    <h1 class="mymsgs">
 
         WELCOME TO TODOS LIST
     </h1>
-    <h1>
+    <h1 class="mymsgs">
         PLEASE LOGIN AND USE FEATCHERS
     </h1>
 
