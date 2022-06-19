@@ -1,1 +1,1 @@
-web: gunicorn player.wsgi
+web: waitress-serve --port=$PORT todo.wsgi:application
