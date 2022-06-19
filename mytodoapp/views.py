@@ -109,3 +109,14 @@ def udelete(request,sno):
 	item = todo.objects.get(sno=sno , user=user).delete()
 	# item.delete()
 	return redirect(index)
+
+
+
+
+
+
+
+
+
+
+	
