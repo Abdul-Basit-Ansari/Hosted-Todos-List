@@ -28,7 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 # ALLOWED_HOSTS = ["tasks-list-django.herokuapp.com","localhost"]
-ALLOWED_HOSTS = ["https://tasks-list-django.herokuapp.com","localhost"]
+ALLOWED_HOSTS = ["tasks-list-django.herokuapp.com","localhost"]
 
 
 # Application definition
