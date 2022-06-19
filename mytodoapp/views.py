@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from .models import todo
 from django.contrib import messages
 from django.contrib.auth  import authenticate,  login, logout
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+@csrf_exempt
 def index(request):
 	user = request.user
 	if user.is_authenticated:
@@ -16,7 +18,7 @@ def index(request):
 
 
 
-
+@csrf_exempt
 def addtodo(request):
 	user = request.user
 	if user.is_authenticated:
@@ -36,7 +38,7 @@ def addtodo(request):
 
 
 
-
+@csrf_exempt
 def signup(request):
 	u=request.user
 	if u.is_authenticated:
@@ -50,7 +52,7 @@ def signup(request):
 			email = request.POST.get('email')
 			pass1 = request.POST.get('pass1')
 			pass2 = request.POST.get('pass2')
-			# print(fname,lname,uname,phone,email,pass1,pass2)
+			
 			if pass1 != pass2 :
 				messages.error(request,"Passwords Is Diffrent")
 			user = 	User.objects.create_user(uname,email,pass1)
@@ -61,7 +63,7 @@ def signup(request):
 			login(request, user)
 			messages.success(request,"Your Account Is Created")
 			return redirect("index")
-	print("signup")
+	
 
 	dic={'user':u}
 	if not u.is_authenticated:
@@ -69,14 +71,14 @@ def signup(request):
 	if u.is_authenticated:
 		return redirect("index")
 
-
+@csrf_exempt
 def ulogin(request):
 	user = request.user
 	if request.method == "POST":
 			uname=request.POST.get('uname')
 			password=request.POST.get('password')
 			user=authenticate(username= uname, password=password)
-			print(uname,password)
+		
 			if user is not None:
 				login(request, user)
 				messages.success(request, "Successfully Logged In")
@@ -95,13 +97,13 @@ def ulogin(request):
 	return redirect("index")
 
 
-
+@csrf_exempt
 def ulogout(request):
 	user = request.user
 	logout(request)
 	return redirect(index)
 
-
+@csrf_exempt
 def udelete(request,sno):
 	user = request.user
 	item = todo.objects.get(sno=sno , user=user).delete()
